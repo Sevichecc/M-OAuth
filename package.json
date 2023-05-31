@@ -1,0 +1,35 @@
+{
+  "name": "ma-oauth",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "TAMAGUI_TARGET=web next dev --turbo",
+    "build": "NODE_ENV=production next build",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:fix": "eslint . -fix",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@tamagui/config": "^1.30.16",
+    "@tamagui/next-plugin": "^1.30.16",
+    "@tamagui/shorthands": "^1.30.16",
+    "@tamagui/themes": "^1.30.16",
+    "@types/node": "20.2.5",
+    "@types/react": "18.2.7",
+    "@types/react-dom": "18.2.4",
+    "eslint-config-next": "13.4.4",
+    "next": "13.4.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "tamagui": "^1.30.16",
+    "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.39.4",
+    "eslint": "8.41.0",
+    "eslint-config-prettier": "^8.8.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.2"
+  }
+}
