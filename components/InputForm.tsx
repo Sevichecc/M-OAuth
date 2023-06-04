@@ -15,7 +15,8 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import ScopeInput from './ScopeInput';
+import { readScopes, writeScopes, adminScopes } from "@/lib/utils"
+import ScopeSection from "./ScopeSection"
 
 const formSchema = z.object({
   instance: z.string().trim(),
@@ -29,14 +30,13 @@ const InputForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      instance:'https://',
       clientName: '',
       redirectUris: 'urn:ietf:wg:oauth:2.0:oob',
     },
   })
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
     console.log(values)
   }
 
@@ -55,7 +55,6 @@ const InputForm = () => {
               </FormControl>
               <FormMessage />
             </FormItem>
-
           )}
         />
         <FormField
@@ -100,12 +99,19 @@ const InputForm = () => {
         />
         <FormField
           control={form.control}
-          name="redirectUris"
+          name="scopes"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Scopes</FormLabel>
-              <FormControl>
-                <ScopeInput {...field} />
+              <FormControl className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2">
+                  <ScopeSection method="read" scopes={readScopes} />
+                  <ScopeSection method="write" scopes={writeScopes} />
+                  <ScopeSection method="admin" scopes={adminScopes} />
+                  <ScopeSection method="follow" />
+                  <ScopeSection method="push" />
+                  <ScopeSection method="crypto" />
+                </div>
               </FormControl>
               <FormMessage />
             </FormItem>

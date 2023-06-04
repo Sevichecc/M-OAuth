@@ -1,46 +1,41 @@
 "use client";
 
 import { Checkbox } from "@/components/ui/checkbox";
-import { ReadScope, AdminScope, WriteScope } from "@/lib/types";
-import { readScopes, adminScopes, writeScopes } from "@/lib/utils";
-import { MethodType } from "@/lib/types";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { ChevronsUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ChevronsUpDown } from "lucide-react";
+
+import { ReadScope, AdminScope, WriteScope } from "@/lib/types";
+import { MethodType } from "@/lib/types";
+import { ControllerRenderProps } from "react-hook-form";
 
 interface ScopeSectionProps {
   method: MethodType;
   scopes?: ReadScope[] | WriteScope[] | AdminScope[];
 }
 
-const ScopeSection: React.FC<ScopeSectionProps> = ({ method, scopes }) => {
+const ScopeSection: React.FC<ScopeSectionProps> = ({ method, scopes}) => {
+
   return (
-    <Collapsible
-      className="
-    flex
-    flex-col
-    rounded-md bg-slate-50 px-4
-    py-3
-    "
-    >
+    <Collapsible className="flex flex-col rounded-md bg-slate-50 px-4 py-3">
       <div className="flex justify-between">
-        <div className="items-top flex space-x-2">
-          <Checkbox id="terms1" />
+        <div className="items-top flex space-x-2 ">
+          <Checkbox id={method}/>
           <div className="grid gap-1.5 leading-none">
             <label
-              htmlFor="terms1"
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              htmlFor={method}
+              className="text-sm font-medium leading-none hover:cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
               {method}
             </label>
-            <p className="text-sm text-muted-foreground">
-              {method === "read" && "read all your account's data"}
-              {method === "write" && "modify all your account's data"}
-              {method === "admin" && "read all data on the server"}
+            <p className="text-xs text-muted-foreground">
+              {method === "read" && "read your account's data"}
+              {method === "write" && "modify your account's data"}
+              {method === "admin" && "read data on the server"}
               {method === "follow" && "modify account relationships"}
               {method === "push" && "receive your push notifications"}
               {method === "crypto" && "use end-to-end encryption"}
@@ -82,17 +77,4 @@ const ScopeSection: React.FC<ScopeSectionProps> = ({ method, scopes }) => {
   );
 };
 
-const ScopeInput = (props: any) => {
-  return (
-    <div className="flex flex-col gap-2">
-      <ScopeSection method="read" scopes={readScopes} />
-      <ScopeSection method="write" scopes={writeScopes} />
-      <ScopeSection method="admin" scopes={adminScopes} />
-      <ScopeSection method="follow" />
-      <ScopeSection method="push" />
-      <ScopeSection method="crypto" />
-    </div>
-  );
-};
-
-export default ScopeInput;
+export default ScopeSection;
