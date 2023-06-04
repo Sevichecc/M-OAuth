@@ -1,9 +1,9 @@
 {
   "name": "ma-oauth",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "TAMAGUI_TARGET=web next dev --turbo",
+    "dev": "next dev --turbo",
     "build": "NODE_ENV=production next build",
     "start": "next start",
     "lint": "next lint",
@@ -11,25 +11,33 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@tamagui/config": "^1.30.16",
-    "@tamagui/next-plugin": "^1.30.16",
-    "@tamagui/shorthands": "^1.30.16",
-    "@tamagui/themes": "^1.30.16",
+    "@hookform/resolvers": "^3.1.0",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-slot": "^1.0.2",
     "@types/node": "20.2.5",
     "@types/react": "18.2.7",
     "@types/react-dom": "18.2.4",
+    "autoprefixer": "^10.4.14",
+    "class-variance-authority": "^0.6.0",
+    "clsx": "^1.2.1",
     "eslint-config-next": "13.4.4",
+    "lucide-react": "^0.230.0",
+    "masto": "^5.11.3",
     "next": "13.4.4",
+    "postcss": "^8.4.24",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "tamagui": "^1.30.16",
-    "typescript": "5.0.4"
+    "react-hook-form": "^7.44.3",
+    "tailwind-merge": "^1.13.0",
+    "tailwindcss-animate": "^1.0.5",
+    "typescript": "5.0.4",
+    "zod": "^3.21.4"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.39.4",
     "eslint": "8.41.0",
     "eslint-config-prettier": "^8.8.0",
     "husky": "^8.0.3",
-    "lint-staged": "^13.2.2"
+    "lint-staged": "^13.2.2",
+    "tailwindcss": "^3.3.2"
   }
 }
