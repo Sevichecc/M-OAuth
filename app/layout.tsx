@@ -1,10 +1,10 @@
 import "@/styles/globals.css"
-import { Inter } from 'next/font/google'
-const inter = Inter({ subsets: ['latin'] })
+import { fontSans } from "@/lib/fonts"
+import { cn } from "@/lib/utils"
 
 export const metadata = {
-  title: 'Ma-OAuth',
-  description: 'Generated Access Token for Akkoma / Pleroma / Mastodon',
+  title: 'M-OAuth',
+  description: 'Access token generator for Akkoma, Pleroma, Mastodon, Misskey APIs.',
 }
 
 export default function RootLayout({
@@ -14,7 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <head />
+      <body className={cn(
+        "min-h-screen bg-background font-sans antialiased mx-auto max-w-2xl px-5",
+        fontSans.variable
+      )}>
         {children}
       </body>
     </html>
