@@ -1,9 +1,12 @@
-import InputForm from "@/components/InputForm"
+import InputForm from "@/components/InputForm";
+import ClientOnly from "@/components/ClientOnly";
 
 export default function Home() {
   return (
-    <main >
-      <InputForm />
+    <main>
+      <ClientOnly>
+        <InputForm />
+      </ClientOnly>
     </main>
-  )
+  );
 }
