@@ -1,0 +1,1 @@
+Access token generator for Akkoma, Pleroma, Mastodon, Misskey APIs.
