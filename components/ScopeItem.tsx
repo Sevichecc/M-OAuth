@@ -1,12 +1,14 @@
-import { Checkbox } from "@radix-ui/react-checkbox";
+'use client'
+
 import { MethodType } from "./InputForm";
+import { Checkbox } from "@/components/ui/checkbox";
 
 interface ScopeCheckboxProps {
   scope: string;
   method: MethodType;
 }
 
-const ScopeCheckbox: React.FC<ScopeCheckboxProps> = ({ scope, method }) => {
+const ScopeItem: React.FC<ScopeCheckboxProps> = ({ scope, method }) => {
   return (
     <div className={`items-top flex space-x-2 hover:cursor-pointer`}>
       <Checkbox id={`${scope}`} />
@@ -25,4 +27,4 @@ const ScopeCheckbox: React.FC<ScopeCheckboxProps> = ({ scope, method }) => {
   );
 };
 
-export default ScopeCheckbox;
+export default ScopeItem;

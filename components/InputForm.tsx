@@ -33,6 +33,7 @@ export type MethodType =
   | "push";
 export interface ScopeInfo {
   method: MethodType;
+  label: string;
   scopes?: string[] | string[][];
   description: string;
 }
@@ -40,29 +41,35 @@ export interface ScopeInfo {
 const scopesInfo: ScopeInfo[] = [
   {
     method: "read",
+    label: 'Read',
     scopes: READ_SCOPES,
     description: "read account's data",
   },
   {
     method: "write",
+    label: 'Write',
     scopes: WRITE_SCOPES,
     description: "modify account's data",
   },
   {
     method: "follow",
+    label: 'Follow',
     description: "modify account relationships,deprecated in 3.5.0 and newer.",
   },
   {
     method: "push",
+    label: "Push",
     description: "receive push notifications",
   },
   {
     method: "admin",
+    label: 'Admin',
     scopes: [ADMIN_READ_SCOPES, ADMIN_WRITE_SCOPES],
     description: "read all data on the server",
   },
   {
     method: "crypto",
+    label: "Crypto",
     description: "use end-to-end encryption",
   },
 ];

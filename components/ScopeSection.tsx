@@ -10,14 +10,14 @@ import { Button } from "@/components/ui/button";
 import { ChevronsUpDown } from "lucide-react";
 
 import { ScopeInfo } from "./InputForm";
-import ScopeCheckbox from "./ScopeCheckbox";
+import ScopeItem from "./ScopeItem";
 interface ScopeSectionProps {
   info: ScopeInfo;
   field: any;
 }
 
 const ScopeSection: React.FC<ScopeSectionProps> = ({ info, field }) => {
-  const { method, description, scopes } = info;
+  const { method, description, scopes, label } = info;
 
   return (
     <Collapsible className="flex flex-col rounded-md bg-slate-50 px-4 py-3">
@@ -29,7 +29,7 @@ const ScopeSection: React.FC<ScopeSectionProps> = ({ info, field }) => {
               htmlFor={method}
               className="text-sm font-medium leading-none hover:cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
-              {method}
+              {label}
             </label>
             <p className="text-xs text-muted-foreground">{description}</p>
           </div>
@@ -57,12 +57,12 @@ const ScopeSection: React.FC<ScopeSectionProps> = ({ info, field }) => {
                     className="flex flex-col gap-2"
                   >
                     {items.map((item) => (
-                      <ScopeCheckbox scope={item} key={item} method={method} />
+                      <ScopeItem scope={item} key={item} method={method} />
                     ))}
                   </div>
                 ))
               : (scopes as string[]).map((scope) => (
-                  <ScopeCheckbox scope={scope} key={scope} method={method} />
+                  <ScopeItem scope={scope} key={scope} method={method} />
                 ))}
           </div>
         </CollapsibleContent>
