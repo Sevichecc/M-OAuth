@@ -13,11 +13,11 @@ import { AppEntry } from "@/lib/types";
 import { CopyButton } from "./ui/copybutton";
 
 const renderTableRow = (label: string, value: string | undefined) => (
-  <TableRow className="group relative">
+  <TableRow className="relative">
     <TableCell className="font-medium">{label}</TableCell>
-    <TableCell className="font-mono break-all flex justify-between items-center">
-      {value} 
-      {value && <CopyButton value={value} className="end-2 shrink-0"/>}
+    <TableCell className="flex items-center justify-between break-all font-mono">
+      {value}
+      {value && <CopyButton value={value} className="end-2 shrink-0" />}
     </TableCell>
   </TableRow>
 );

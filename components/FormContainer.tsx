@@ -1,6 +1,6 @@
 "use client";
 import InputForm from "@/components/InputForm";
-import DataDisplay from "@/components/DataDisplay";
+import DataDisplay from "@/components/ResultTable";
 import useCreateApp from "@/hooks/useCreateApp";
 
 const FormContainer = () => {
