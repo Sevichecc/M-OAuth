@@ -32,7 +32,9 @@ const ScopeItem: React.FC<ScopeCheckboxProps> = ({ scope, method, field }) => {
         <label
           htmlFor={scope}
           className={`text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 ${
-            isCovered ? "hover:cursor-not-allowed opacity-70" : "hover:cursor-pointer"
+            isCovered
+              ? "opacity-70 hover:cursor-not-allowed"
+              : "hover:cursor-pointer"
           }`}
         >
           {method == "admin" && (
