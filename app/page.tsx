@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import DataDisplay from "@/components/DataDisplay";
+import FormContainer from "@/components/FormContainer";
 
 export default function Home() {
   return (
@@ -19,20 +19,14 @@ export default function Home() {
             <CardTitle>M-OAuth</CardTitle>
             <CardDescription>Card Description</CardDescription>
           </CardHeader>
-
           <CardContent>
             <ClientOnly>
-              <InputForm />
+              <FormContainer/>
             </ClientOnly>
           </CardContent>
           {/* <CardFooter>
           <p>Card Footer</p>
         </CardFooter> */}
-        </Card>
-        <Card>
-          <CardContent>
-            <DataDisplay />
-          </CardContent>
         </Card>
       </div>
     </main>

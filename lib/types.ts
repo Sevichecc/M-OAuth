@@ -18,10 +18,9 @@ export interface ScopeInfo {
     id: string;
     name: string;
     website: string | null;
-    redirectUri: string;
-    clientId: string;
-    clientSecret: string;
-    vapidKey: string;
+    redirect_uri: string;
+    client_id: string;
+    client_secret: string;
+    vapid_key: string;
   }
 
-  

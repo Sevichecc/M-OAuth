@@ -15,9 +15,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import ScopeSection from "@/components/ScopeSection";
+import ScopeSection from "@/components/scopes/ScopeSection";
 import { scopesInfo } from "@/lib/utils";
-import useCreateApp from "@/hooks/useCreateApp";
 
 const formSchema = z.object({
   instance: z.string().trim(),
@@ -28,9 +27,11 @@ const formSchema = z.object({
 });
 
 export type FormSchema = z.infer<typeof formSchema>;
+interface InputFormProps {
+  createApp: ({}: FormSchema) => Promise<void>;
+}
 
-const InputForm = () => {
-  const { createApp } = useCreateApp();
+const InputForm: React.FC<InputFormProps> = ({ createApp }) => {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,7 +44,10 @@ const InputForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(createApp)} className="space-y-6 flex flex-col">
+      <form
+        onSubmit={form.handleSubmit(createApp)}
+        className="flex flex-col space-y-6 mb-6"
+      >
         <FormField
           control={form.control}
           name="instance"
@@ -132,7 +136,9 @@ const InputForm = () => {
             </FormItem>
           )}
         />
-          <Button type="submit" className="w-ful">Submit</Button>
+        <Button type="submit" className="w-ful">
+          Submit
+        </Button>
       </form>
     </Form>
   );

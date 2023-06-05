@@ -24,7 +24,6 @@ const useCreateApp = () => {
         scopes: scopes?.join(" "),
       };
 
-      console.log("app,", app);
       try {
         let request = await fetch(`${instance}/api/v1/apps`, {
           method: "POST",
@@ -41,10 +40,9 @@ const useCreateApp = () => {
       } catch (error) {
         throw new Error((error as MError).error);
       }
-    },
-    []
+    },[]
   );
-  console.log(appEntry);
+
   return {
     appEntry,
     createApp,

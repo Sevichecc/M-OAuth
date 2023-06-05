@@ -8,7 +8,7 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { Button } from "@/components/ui/button";
-import ScopeItem from "@/components/ScopeItem";
+import ScopeItem from "@/components/scopes/ScopeItem";
 
 import { ScopeInfo } from "@/lib/types";
 
