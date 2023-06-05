@@ -19,11 +19,22 @@ interface ScopeSectionProps {
 const ScopeSection: React.FC<ScopeSectionProps> = ({ info, field }) => {
   const { method, description, scopes, label } = info;
 
+  console.log(field);
   return (
     <Collapsible className="flex flex-col rounded-md bg-slate-50 px-4 py-3">
       <div className="flex justify-between">
         <div className="items-top flex space-x-2 ">
-          <Checkbox id={method} />
+          <Checkbox
+            id={method}
+            checked={field.value?.includes(method)}
+            onCheckedChange={(checked) => {
+              return checked
+                ? field.onChange([...field.value, method])
+                : field.onChange(
+                    field.value?.filter((value: string) => value !== method)
+                  );
+            }}
+          />
           <div className="grid gap-1.5 leading-none">
             <label
               htmlFor={method}
@@ -54,15 +65,25 @@ const ScopeSection: React.FC<ScopeSectionProps> = ({ info, field }) => {
               ? (scopes as string[][]).map((items) => (
                   <div
                     key={`${items}${method}`}
-                    className="flex flex-col gap-2"
+                    className="mb-2 flex flex-col gap-2 md:mb-0"
                   >
                     {items.map((item) => (
-                      <ScopeItem scope={item} key={item} method={method} />
+                      <ScopeItem
+                        scope={item}
+                        key={item}
+                        method={method}
+                        field={field}
+                      />
                     ))}
                   </div>
                 ))
               : (scopes as string[]).map((scope) => (
-                  <ScopeItem scope={scope} key={scope} method={method} />
+                  <ScopeItem
+                    scope={scope}
+                    key={scope}
+                    method={method}
+                    field={field}
+                  />
                 ))}
           </div>
         </CollapsibleContent>

@@ -69,7 +69,7 @@ const scopesInfo: ScopeInfo[] = [
   },
   {
     method: "crypto",
-    label: "Crypto",
+    label:  "Crypto",
     description: "use end-to-end encryption",
   },
 ];
@@ -89,6 +89,7 @@ const InputForm = () => {
       instance: "https://",
       clientName: "",
       redirectUris: "",
+      scopes:[]
     },
   });
 
