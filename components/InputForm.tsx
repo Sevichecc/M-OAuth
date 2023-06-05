@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import * as z from "zod"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -13,36 +13,84 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { readScopes, writeScopes, adminScopes } from "@/lib/utils"
-import ScopeSection from "./ScopeSection"
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import {
+  READ_SCOPES,
+  WRITE_SCOPES,
+  ADMIN_READ_SCOPES,
+  ADMIN_WRITE_SCOPES,
+} from "@/lib/utils";
+import ScopeSection from "./ScopeSection";
+
+export type MethodType =
+  | "read"
+  | "write"
+  | "follow"
+  | "crypto"
+  | "follow"
+  | "admin"
+  | "push";
+export interface ScopeInfo {
+  method: MethodType;
+  scopes?: string[] | string[][];
+  description: string;
+}
+
+const scopesInfo: ScopeInfo[] = [
+  {
+    method: "read",
+    scopes: READ_SCOPES,
+    description: "read account's data",
+  },
+  {
+    method: "write",
+    scopes: WRITE_SCOPES,
+    description: "modify account's data",
+  },
+  {
+    method: "follow",
+    description: "modify account relationships,deprecated in 3.5.0 and newer.",
+  },
+  {
+    method: "push",
+    description: "receive push notifications",
+  },
+  {
+    method: "admin",
+    scopes: [ADMIN_READ_SCOPES, ADMIN_WRITE_SCOPES],
+    description: "read all data on the server",
+  },
+  {
+    method: "crypto",
+    description: "use end-to-end encryption",
+  },
+];
 
 const formSchema = z.object({
   instance: z.string().trim(),
   clientName: z.string().trim(),
   redirectUris: z.string().url().trim(),
   scopes: z.string().array().nonempty().optional(),
-  website: z.string().trim().optional()
-})
+  website: z.string().trim().optional(),
+});
 
 const InputForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      instance:'https://',
-      clientName: '',
-      redirectUris: 'urn:ietf:wg:oauth:2.0:oob',
+      instance: "https://",
+      clientName: "",
+      redirectUris: "",
     },
-  })
+  });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values)
+    console.log(values);
   }
 
   return (
     <Form {...form}>
-      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-5">M-OAuth</h1>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <FormField
           control={form.control}
@@ -51,7 +99,7 @@ const InputForm = () => {
             <FormItem>
               <FormLabel>Instance</FormLabel>
               <FormControl>
-                <Input placeholder="mastodon.social" {...field} />
+                <Input {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -92,7 +140,13 @@ const InputForm = () => {
               <FormControl>
                 <Input {...field} />
               </FormControl>
-              <FormDescription>Use  <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-semibold">urn:ietf:wg:oauth:2.0:oob</code> for local tests</FormDescription>
+              <FormDescription>
+                Use{" "}
+                <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-semibold">
+                  urn:ietf:wg:oauth:2.0:oob
+                </code>{" "}
+                for local tests
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -100,18 +154,27 @@ const InputForm = () => {
         <FormField
           control={form.control}
           name="scopes"
-          render={({ field }) => (
+          render={() => (
             <FormItem>
               <FormLabel>Scopes</FormLabel>
               <FormControl className="flex flex-col gap-2">
-                <div className="flex flex-col gap-2">
-                  <ScopeSection method="read" scopes={readScopes} />
-                  <ScopeSection method="write" scopes={writeScopes} />
-                  <ScopeSection method="admin" scopes={adminScopes} />
-                  <ScopeSection method="follow" />
-                  <ScopeSection method="push" />
-                  <ScopeSection method="crypto" />
-                </div>
+                <FormField
+                  control={form.control}
+                  name="scopes"
+                  render={({ field }) => (
+                    <FormItem>
+                      <div className="flex flex-col gap-2">
+                        {scopesInfo.map((info) => (
+                          <ScopeSection
+                            key={info.method}
+                            info={info}
+                            field={field}
+                          />
+                        ))}
+                      </div>
+                    </FormItem>
+                  )}
+                ></FormField>
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -120,7 +183,6 @@ const InputForm = () => {
         <Button type="submit">Submit</Button>
       </form>
     </Form>
-
   );
 };
 export default InputForm;

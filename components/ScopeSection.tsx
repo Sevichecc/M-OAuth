@@ -9,22 +9,21 @@ import {
 import { Button } from "@/components/ui/button";
 import { ChevronsUpDown } from "lucide-react";
 
-import { ReadScope, AdminScope, WriteScope } from "@/lib/types";
-import { MethodType } from "@/lib/types";
-import { ControllerRenderProps } from "react-hook-form";
-
+import { ScopeInfo } from "./InputForm";
+import ScopeCheckbox from "./ScopeCheckbox";
 interface ScopeSectionProps {
-  method: MethodType;
-  scopes?: ReadScope[] | WriteScope[] | AdminScope[];
+  info: ScopeInfo;
+  field: any;
 }
 
-const ScopeSection: React.FC<ScopeSectionProps> = ({ method, scopes}) => {
+const ScopeSection: React.FC<ScopeSectionProps> = ({ info, field }) => {
+  const { method, description, scopes } = info;
 
   return (
     <Collapsible className="flex flex-col rounded-md bg-slate-50 px-4 py-3">
       <div className="flex justify-between">
         <div className="items-top flex space-x-2 ">
-          <Checkbox id={method}/>
+          <Checkbox id={method} />
           <div className="grid gap-1.5 leading-none">
             <label
               htmlFor={method}
@@ -32,14 +31,7 @@ const ScopeSection: React.FC<ScopeSectionProps> = ({ method, scopes}) => {
             >
               {method}
             </label>
-            <p className="text-xs text-muted-foreground">
-              {method === "read" && "read your account's data"}
-              {method === "write" && "modify your account's data"}
-              {method === "admin" && "read data on the server"}
-              {method === "follow" && "modify account relationships"}
-              {method === "push" && "receive your push notifications"}
-              {method === "crypto" && "use end-to-end encryption"}
-            </p>
+            <p className="text-xs text-muted-foreground">{description}</p>
           </div>
         </div>
         {scopes && (
@@ -51,28 +43,30 @@ const ScopeSection: React.FC<ScopeSectionProps> = ({ method, scopes}) => {
           </CollapsibleTrigger>
         )}
       </div>
-      <CollapsibleContent>
-        {scopes && (
-          <div className="grid grid-cols-1 gap-y-4 pb-2 ps-6 pt-5 md:grid-cols-2 ">
-            {scopes.map((scope) => (
-              <div
-                className="items-top flex space-x-2 hover:cursor-pointer"
-                key={`${method}:${scope}`}
-              >
-                <Checkbox id={`${method + scope}`} />
-                <div className="grid gap-1.5 leading-none">
-                  <label
-                    htmlFor={`${method + scope}`}
-                    className="text-sm font-medium leading-none hover:cursor-pointer peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+      {scopes && (
+        <CollapsibleContent>
+          <div
+            className={`grid grid-cols-1 pb-2 ps-6 pt-5 md:grid-cols-2 ${
+              method === "admin" ? "" : "gap-2"
+            }`}
+          >
+            {method === "admin"
+              ? (scopes as string[][]).map((items) => (
+                  <div
+                    key={`${items}${method}`}
+                    className="flex flex-col gap-2"
                   >
-                    {scope}
-                  </label>
-                </div>
-              </div>
-            ))}
+                    {items.map((item) => (
+                      <ScopeCheckbox scope={item} key={item} method={method} />
+                    ))}
+                  </div>
+                ))
+              : (scopes as string[]).map((scope) => (
+                  <ScopeCheckbox scope={scope} key={scope} method={method} />
+                ))}
           </div>
-        )}
-      </CollapsibleContent>
+        </CollapsibleContent>
+      )}
     </Collapsible>
   );
 };
