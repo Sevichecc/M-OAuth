@@ -1,7 +1,7 @@
 "use client";
 
-import { MethodType } from "./InputForm";
 import { Checkbox } from "@/components/ui/checkbox";
+import { MethodType } from "@/lib/types";
 
 interface ScopeCheckboxProps {
   scope: string;

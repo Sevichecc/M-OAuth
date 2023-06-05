@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { ScopeInfo } from "./types";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -52,4 +53,41 @@ export const ADMIN_WRITE_SCOPES = [
   "admin:write:ip_blocks",
   "admin:write:email_domain_blocks",
   "admin:write:canonical_email_blocks",
+];
+
+export const scopesInfo: ScopeInfo[] = [
+  {
+    method: "read",
+    label: "Read",
+    scopes: READ_SCOPES,
+    description: "read account's data",
+  },
+  {
+    method: "write",
+    label: "Write",
+    scopes: WRITE_SCOPES,
+    description: "modify account's data",
+  },
+  {
+    method: "admin",
+    label: "Admin",
+    scopes: [ADMIN_READ_SCOPES, ADMIN_WRITE_SCOPES],
+    description: "read all data on the server",
+  },
+  {
+    method: "follow",
+    label: "Follow",
+    description: "modify account relationships,deprecated in 3.5.0 and newer.",
+  },
+  {
+    method: "push",
+    label: "Push",
+    description: "receive push notifications",
+  },
+
+  {
+    method: "crypto",
+    label: "Crypto",
+    description: "use end-to-end encryption",
+  },
 ];

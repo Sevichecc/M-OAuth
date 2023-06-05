@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronsUpDown } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Collapsible,
@@ -7,10 +8,10 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { Button } from "@/components/ui/button";
-import { ChevronsUpDown } from "lucide-react";
+import ScopeItem from "@/components/ScopeItem";
 
-import { ScopeInfo } from "./InputForm";
-import ScopeItem from "./ScopeItem";
+import { ScopeInfo } from "@/lib/types";
+
 interface ScopeSectionProps {
   info: ScopeInfo;
   field: any;

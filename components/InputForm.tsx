@@ -1,10 +1,10 @@
 "use client";
-
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import {
   Form,
   FormControl,
@@ -14,66 +14,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import {
-  READ_SCOPES,
-  WRITE_SCOPES,
-  ADMIN_READ_SCOPES,
-  ADMIN_WRITE_SCOPES,
-} from "@/lib/utils";
-import ScopeSection from "./ScopeSection";
 
-export type MethodType =
-  | "read"
-  | "write"
-  | "follow"
-  | "crypto"
-  | "follow"
-  | "admin"
-  | "push";
-export interface ScopeInfo {
-  method: MethodType;
-  label: string;
-  scopes?: string[] | string[][];
-  description: string;
-}
-
-const scopesInfo: ScopeInfo[] = [
-  {
-    method: "read",
-    label: "Read",
-    scopes: READ_SCOPES,
-    description: "read account's data",
-  },
-  {
-    method: "write",
-    label: "Write",
-    scopes: WRITE_SCOPES,
-    description: "modify account's data",
-  },
-  {
-    method: "admin",
-    label: "Admin",
-    scopes: [ADMIN_READ_SCOPES, ADMIN_WRITE_SCOPES],
-    description: "read all data on the server",
-  },
-  {
-    method: "follow",
-    label: "Follow",
-    description: "modify account relationships,deprecated in 3.5.0 and newer.",
-  },
-  {
-    method: "push",
-    label: "Push",
-    description: "receive push notifications",
-  },
-
-  {
-    method: "crypto",
-    label: "Crypto",
-    description: "use end-to-end encryption",
-  },
-];
+import ScopeSection from "@/components/ScopeSection";
+import { scopesInfo } from "@/lib/utils";
+import useCreateApp from "@/hooks/useCreateApp";
 
 const formSchema = z.object({
   instance: z.string().trim(),
@@ -83,25 +27,23 @@ const formSchema = z.object({
   website: z.string().url().trim().optional(),
 });
 
+export type FormSchema = z.infer<typeof formSchema>;
+
 const InputForm = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
+  const { createApp } = useCreateApp();
+  const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       instance: "https://",
       clientName: "",
       redirectUris: "",
-      scopes: [],
+      scopes: ["read"],
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    const scopes = values.scopes?.join(" ");
-    console.log(scopes);
-  }
-
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+      <form onSubmit={form.handleSubmit(createApp)} className="space-y-6 flex flex-col">
         <FormField
           control={form.control}
           name="instance"
@@ -190,7 +132,7 @@ const InputForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+          <Button type="submit" className="w-ful">Submit</Button>
       </form>
     </Form>
   );
