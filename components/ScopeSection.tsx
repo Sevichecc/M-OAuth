@@ -19,7 +19,6 @@ interface ScopeSectionProps {
 const ScopeSection: React.FC<ScopeSectionProps> = ({ info, field }) => {
   const { method, description, scopes, label } = info;
 
-  console.log(field);
   return (
     <Collapsible className="flex flex-col rounded-md bg-slate-50 px-4 py-3">
       <div className="flex justify-between">

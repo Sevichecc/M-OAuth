@@ -41,19 +41,25 @@ export interface ScopeInfo {
 const scopesInfo: ScopeInfo[] = [
   {
     method: "read",
-    label: 'Read',
+    label: "Read",
     scopes: READ_SCOPES,
     description: "read account's data",
   },
   {
     method: "write",
-    label: 'Write',
+    label: "Write",
     scopes: WRITE_SCOPES,
     description: "modify account's data",
   },
   {
+    method: "admin",
+    label: "Admin",
+    scopes: [ADMIN_READ_SCOPES, ADMIN_WRITE_SCOPES],
+    description: "read all data on the server",
+  },
+  {
     method: "follow",
-    label: 'Follow',
+    label: "Follow",
     description: "modify account relationships,deprecated in 3.5.0 and newer.",
   },
   {
@@ -61,15 +67,10 @@ const scopesInfo: ScopeInfo[] = [
     label: "Push",
     description: "receive push notifications",
   },
-  {
-    method: "admin",
-    label: 'Admin',
-    scopes: [ADMIN_READ_SCOPES, ADMIN_WRITE_SCOPES],
-    description: "read all data on the server",
-  },
+
   {
     method: "crypto",
-    label:  "Crypto",
+    label: "Crypto",
     description: "use end-to-end encryption",
   },
 ];
@@ -77,9 +78,9 @@ const scopesInfo: ScopeInfo[] = [
 const formSchema = z.object({
   instance: z.string().trim(),
   clientName: z.string().trim(),
-  redirectUris: z.string().url().trim(),
+  redirectUris: z.string().trim(),
   scopes: z.string().array().nonempty().optional(),
-  website: z.string().trim().optional(),
+  website: z.string().url().trim().optional(),
 });
 
 const InputForm = () => {
@@ -89,12 +90,13 @@ const InputForm = () => {
       instance: "https://",
       clientName: "",
       redirectUris: "",
-      scopes:[]
+      scopes: [],
     },
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    const scopes = values.scopes?.join(" ");
+    console.log(scopes);
   }
 
   return (
