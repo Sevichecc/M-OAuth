@@ -1,17 +1,13 @@
 import { FormSchema } from "@/components/InputForm";
 import { useCallback, useState } from "react";
-import { AppEntry } from "@/lib/types";
-
-type MError = {
-  error: string;
-};
+import { AppEntry, MError } from "@/lib/types";
 
 const useCreateApp = () => {
   const [appEntry, setAppEntry] = useState<AppEntry>();
 
   const createApp = useCallback(
     async ({
-      instance,
+      instanceUrl,
       website,
       clientName,
       redirectUris,
@@ -25,7 +21,7 @@ const useCreateApp = () => {
       };
 
       try {
-        let request = await fetch(`${instance}/api/v1/apps`, {
+        let request = await fetch(`${instanceUrl}/api/v1/apps`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

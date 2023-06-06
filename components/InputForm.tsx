@@ -17,9 +17,12 @@ import {
 
 import ScopeSection from "@/components/scopes/ScopeSection";
 import { scopesInfo } from "@/lib/utils";
+import {  Dispatch, SetStateAction } from "react";
+import { AppEntry } from "@/lib/types";
+import { AppInfo } from "./FormContainer";
 
 const formSchema = z.object({
-  instance: z.string().trim(),
+  instanceUrl: z.string().trim(),
   clientName: z.string().trim(),
   redirectUris: z.string().trim(),
   scopes: z.string().array().nonempty().optional(),
@@ -28,29 +31,35 @@ const formSchema = z.object({
 
 export type FormSchema = z.infer<typeof formSchema>;
 interface InputFormProps {
-  createApp: ({}: FormSchema) => Promise<void>;
+  createApp: ({ }: FormSchema) => Promise<void>
+  setAppInfo: Dispatch<SetStateAction<AppInfo>>
 }
 
-const InputForm: React.FC<InputFormProps> = ({ createApp }) => {
+const InputForm: React.FC<InputFormProps> = ({ createApp, setAppInfo }) => {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      instance: "https://",
+      instanceUrl: "https://",
       clientName: "",
       redirectUris: "",
       scopes: ["read"],
     },
   });
 
+  const onSubmit = async (values: FormSchema) => {
+    setAppInfo(values)
+    await createApp(values)
+  }
+
   return (
     <Form {...form}>
       <form
-        onSubmit={form.handleSubmit(createApp)}
+        onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col space-y-6 mb-6"
       >
         <FormField
           control={form.control}
-          name="instance"
+          name="instanceUrl"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Instance</FormLabel>
