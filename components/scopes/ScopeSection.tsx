@@ -19,7 +19,7 @@ interface ScopeSectionProps {
 
 const ScopeSection: React.FC<ScopeSectionProps> = ({ info, field }) => {
   const { method, description, scopes, label } = info;
-
+  const isNested = scopes && scopes.length !== 0;
   return (
     <Collapsible className="flex flex-col rounded-md bg-slate-50 px-4 py-3">
       <div className="flex justify-between">
@@ -45,7 +45,7 @@ const ScopeSection: React.FC<ScopeSectionProps> = ({ info, field }) => {
             <p className="text-xs text-muted-foreground">{description}</p>
           </div>
         </div>
-        {scopes && (
+        {isNested && (
           <CollapsibleTrigger asChild>
             <Button variant="ghost" size="sm" className="w-9 p-0">
               <ChevronsUpDown className="h-4 w-4" />
@@ -54,7 +54,7 @@ const ScopeSection: React.FC<ScopeSectionProps> = ({ info, field }) => {
           </CollapsibleTrigger>
         )}
       </div>
-      {scopes && (
+      {isNested && (
         <CollapsibleContent>
           <div
             className={`grid grid-cols-1 pb-2 ps-6 pt-5 md:grid-cols-2 ${

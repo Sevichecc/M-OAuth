@@ -4,6 +4,15 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
+import Image from "next/image";
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,11 +28,12 @@ import {
 import ScopeSection from "@/components/scopes/ScopeSection";
 import { AppInfo } from "@/components/FormContainer";
 
-import { scopesInfo } from "@/lib/scopes";
+import { getScopes } from "@/lib/scopes";
 import { Credentials } from "@/lib/types";
 
 const formSchema = z.object({
   instanceUrl: z.string().url().trim(),
+  instanceType: z.enum(["mastodon", "akkoma", "misskey", "pleroma"]),
   clientName: z.string().trim(),
   redirectUris: z.string().trim(),
   scopes: z.string().array().nonempty().optional(),
@@ -31,6 +41,7 @@ const formSchema = z.object({
 });
 
 export type FormSchema = z.infer<typeof formSchema>;
+export type InstanceType = FormSchema["instanceType"];
 interface CreateAppFormProps {
   createApp: ({}: FormSchema) => Promise<void>;
   setAppInfo: Dispatch<SetStateAction<AppInfo>>;
@@ -47,14 +58,19 @@ const CreateAppForm: React.FC<CreateAppFormProps> = ({
     resolver: zodResolver(formSchema),
     defaultValues: {
       instanceUrl: "https://",
+      instanceType: "mastodon",
       clientName: "",
       redirectUris: "urn:ietf:wg:oauth:2.0:oob",
       scopes: ["read"],
-      website: ""
+      website: "",
     },
+    mode: "onChange",
   });
 
+  const watchInstancType = form.watch("instanceType");
+
   const onSubmit = async (values: FormSchema) => {
+    console.log(values);
     setAppInfo(values);
     setIsSubmitted(true);
     await createApp(values);
@@ -77,6 +93,71 @@ const CreateAppForm: React.FC<CreateAppFormProps> = ({
               <FormControl>
                 <Input {...field} />
               </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="instanceType"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Instance Type</FormLabel>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select your instance's type" />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  <SelectItem value="mastodon" className="flex">
+                    <span className="flex">
+                      <Image
+                        src="https://cdn.simpleicons.org/mastodon"
+                        width="15"
+                        height="15"
+                        alt="Github"
+                        className="mr-2"
+                      />
+                      Mastodon
+                    </span>
+                  </SelectItem>
+                  <SelectItem value="pleroma">
+                    <span className="flex">
+                      <Image
+                        src="https://cdn.simpleicons.org/pleroma"
+                        width="15"
+                        height="15"
+                        alt="Github"
+                        className="mr-2"
+                      />
+                      Pleroma
+                    </span></SelectItem>
+                  <SelectItem value="akkoma">
+                    <span className="flex">
+                      <Image
+                        src="https://cdn.simpleicons.org/pleroma"
+                        width="15"
+                        height="15"
+                        alt="Github"
+                        className="mr-2"
+                      />
+                      Akkoma
+                    </span></SelectItem>
+                  <SelectItem value="misskey">
+                    
+                    <span className="flex">
+                      <Image
+                        src="https://cdn.simpleicons.org/misskey"
+                        width="15"
+                        height="15"
+                        alt="Github"
+                        className="mr-2"
+                      />
+                      Misskey
+                    </span></SelectItem>
+                </SelectContent>
+              </Select>
               <FormMessage />
             </FormItem>
           )}
@@ -144,7 +225,7 @@ const CreateAppForm: React.FC<CreateAppFormProps> = ({
                   render={({ field }) => (
                     <FormItem>
                       <div className="flex flex-col gap-2">
-                        {scopesInfo.map((info) => (
+                        {getScopes(watchInstancType).map((info) => (
                           <ScopeSection
                             key={info.method}
                             info={info}

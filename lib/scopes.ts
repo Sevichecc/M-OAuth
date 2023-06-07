@@ -1,5 +1,5 @@
 import { ScopeInfo } from "./types";
-import { InstanceType } from "./types";
+import { InstanceType } from "@/components/CreatAppForm";
 
 // Mastodon Scopes
 const READ_SCOPES = [
@@ -58,7 +58,7 @@ const PLEROMA_READ_SCOPE = [
   ...READ_SCOPES,
   "read:backups",
   "read:chats",
-  "read:securit",
+  "read:security",
 ];
 
 const PLEROMA_WRITE_SCOPE = [...WRITE_SCOPES, "write:chats", "write:security"];
@@ -132,8 +132,8 @@ const MISSKEY_WRITE_SCOPES = [
   "write:channels",
   "write:gallery",
   "write:gallery-likes",
-  'write:clip-favorite',
-  'write:flash'
+  "write:clip-favorite",
+  "write:flash",
 ];
 
 export const getScopes = (instanceType: InstanceType): ScopeInfo[] => {
@@ -157,7 +157,7 @@ export const getScopes = (instanceType: InstanceType): ScopeInfo[] => {
     case "misskey":
       readScopes = MISSKEY_READ_SCOPES;
       writeScopes = MISSKEY_WRITE_SCOPES;
-      adminScopes = []
+      adminScopes = [];
   }
 
   return [
