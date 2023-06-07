@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { AppEntry, MError } from "@/lib/types";
 
 const useCreateApp = () => {
-  const [appEntry, setAppEntry] = useState<AppEntry>();
+  const [credentials, setCredentials] = useState<AppEntry>();
 
   const createApp = useCallback(
     async ({
@@ -32,7 +32,7 @@ const useCreateApp = () => {
         if (!request.ok || request.status === 424) {
           throw new Error((await request.json()).error);
         }
-        setAppEntry(await request.json());
+        setCredentials(await request.json());
       } catch (error) {
         throw new Error((error as MError).error);
       }
@@ -40,7 +40,7 @@ const useCreateApp = () => {
   );
 
   return {
-    appEntry,
+    credentials,
     createApp,
   };
 };

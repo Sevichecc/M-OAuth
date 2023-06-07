@@ -14,7 +14,7 @@ export interface ScopeInfo {
   description: string;
 }
 
-export interface AppEntry {
+export interface Credentials {
   id: string;
   name: string;
   website: string | null;

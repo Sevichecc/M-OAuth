@@ -24,9 +24,6 @@ export default function Home() {
               <FormContainer/>
             </ClientOnly>
           </CardContent>
-          {/* <CardFooter>
-          <p>Card Footer</p>
-        </CardFooter> */}
         </Card>
       </div>
     </main>

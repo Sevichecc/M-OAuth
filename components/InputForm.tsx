@@ -16,13 +16,12 @@ import {
 } from "@/components/ui/form";
 
 import ScopeSection from "@/components/scopes/ScopeSection";
-import { scopesInfo } from "@/lib/utils";
-import {  Dispatch, SetStateAction } from "react";
-import { AppEntry } from "@/lib/types";
+import { scopesInfo } from "@/lib/scopes";
+import { Dispatch, SetStateAction } from "react";
 import { AppInfo } from "./FormContainer";
 
 const formSchema = z.object({
-  instanceUrl: z.string().trim(),
+  instanceUrl: z.string().url().trim(),
   clientName: z.string().trim(),
   redirectUris: z.string().trim(),
   scopes: z.string().array().nonempty().optional(),
@@ -31,8 +30,8 @@ const formSchema = z.object({
 
 export type FormSchema = z.infer<typeof formSchema>;
 interface InputFormProps {
-  createApp: ({ }: FormSchema) => Promise<void>
-  setAppInfo: Dispatch<SetStateAction<AppInfo>>
+  createApp: ({}: FormSchema) => Promise<void>;
+  setAppInfo: Dispatch<SetStateAction<AppInfo>>;
 }
 
 const InputForm: React.FC<InputFormProps> = ({ createApp, setAppInfo }) => {
@@ -41,28 +40,30 @@ const InputForm: React.FC<InputFormProps> = ({ createApp, setAppInfo }) => {
     defaultValues: {
       instanceUrl: "https://",
       clientName: "",
-      redirectUris: "",
+      redirectUris: "urn:ietf:wg:oauth:2.0:oob",
       scopes: ["read"],
     },
   });
 
   const onSubmit = async (values: FormSchema) => {
-    setAppInfo(values)
-    await createApp(values)
-  }
+    setAppInfo(values);
+    await createApp(values);
+  };
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col space-y-6 mb-6"
+        className="mb-6 flex flex-col space-y-6"
       >
         <FormField
           control={form.control}
           name="instanceUrl"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Instance</FormLabel>
+              <FormLabel>
+                Instance<span className="text-sm text-red-400">*</span>
+              </FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -75,7 +76,9 @@ const InputForm: React.FC<InputFormProps> = ({ createApp, setAppInfo }) => {
           name="clientName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Application name</FormLabel>
+              <FormLabel>
+                Application name<span className="text-sm text-red-400">*</span>
+              </FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -101,7 +104,9 @@ const InputForm: React.FC<InputFormProps> = ({ createApp, setAppInfo }) => {
           name="redirectUris"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Redirect URI</FormLabel>
+              <FormLabel>
+                Redirect URI<span className="text-sm text-red-400">*</span>
+              </FormLabel>
               <FormControl>
                 <Input {...field} />
               </FormControl>
@@ -110,7 +115,7 @@ const InputForm: React.FC<InputFormProps> = ({ createApp, setAppInfo }) => {
                 <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-semibold">
                   urn:ietf:wg:oauth:2.0:oob
                 </code>{" "}
-                for local tests
+                for local tests or for getting access token
               </FormDescription>
               <FormMessage />
             </FormItem>

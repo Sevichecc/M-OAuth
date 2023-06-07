@@ -1,26 +1,27 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import InputForm from "@/components/InputForm";
-import ResultTable from "@/components/ResultTable";
-import TokenTable from "@/components/TokenTable";
+import ResultTable from "@/components/tables/ResultTable";
 import useCreateApp from "@/hooks/useCreateApp";
-import useAuth from "@/hooks/useAuth";
+
 import { FormSchema } from "@/components/InputForm";
 
 export type AppInfo = Pick<FormSchema, "instanceUrl" | "scopes">;
+
 const FormContainer = () => {
-  const { appEntry, createApp } = useCreateApp();
+  const { credentials, createApp } = useCreateApp()
+
   const [appInfo, setAppInfo] = useState<AppInfo>({
     instanceUrl: "",
     scopes: [""],
   });
-  const { token, getAccessToken } = useAuth(appInfo);
 
   return (
     <>
       <InputForm createApp={createApp} setAppInfo={setAppInfo} />
-      {appEntry && <ResultTable appEntry={appEntry} getAccessToken={getAccessToken}/>}
-      {/* <TokenTable appInfo={appInfo}  /> */}
+      {credentials && (
+        <ResultTable credentials={credentials} appInfo={appInfo} />
+      )}
     </>
   );
 };
