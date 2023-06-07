@@ -30,6 +30,7 @@ export const WRITE_SCOPES = [
 ];
 
 export const ADMIN_READ_SCOPES = [
+  "admin:read",
   "admin:read:account",
   "admin:read:reports",
   "admin:read:domain_allows",
@@ -40,6 +41,7 @@ export const ADMIN_READ_SCOPES = [
 ];
 
 export const ADMIN_WRITE_SCOPES = [
+  "admin:write",
   "admin:write:account",
   "admin:write:reports",
   "admin:write:domain_allows",
