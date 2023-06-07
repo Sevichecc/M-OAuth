@@ -12,10 +12,11 @@ import {
 import { Credentials } from "@/lib/types";
 import { CopyButton } from "@/components/ui/copybutton";
 import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { ExternalLink } from "lucide-react";
 import { getAuth } from "@/lib/utils";
 import { AppInfo } from "../FormContainer";
-
+import { KeyRound } from "lucide-react";
 interface ResultTableProps {
   credentials: Credentials;
   appInfo: AppInfo;
@@ -43,8 +44,9 @@ const ResultTable: React.FC<ResultTableProps> = ({ credentials, appInfo }) => {
     vapid_key,
   } = credentials;
 
+  const isLocal = redirect_uri === "urn:ietf:wg:oauth:2.0:oob";
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center gap-5">
       <Table>
         <TableHeader>
           <TableRow>
@@ -64,11 +66,20 @@ const ResultTable: React.FC<ResultTableProps> = ({ credentials, appInfo }) => {
           </TableBody>
         )}
       </Table>
-      {redirect_uri === "urn:ietf:wg:oauth:2.0:oob" && (
-        <Button
-          onClick={() => getAuth(instanceUrl, client_id, scopes)}
-          variant="outline"
-        >
+      {isLocal ? (
+        <Alert>
+          <KeyRound className="h-4 w-4" />
+          <AlertTitle>Need an Access Token?</AlertTitle>
+          <AlertDescription>
+            Set the Redirect URI as{" "}
+            <code className="mt-2 inline-block rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-semibold">
+              urn:ietf:wg:oauth:2.0:oob
+            </code>{" "}
+            to obtain your access token.
+          </AlertDescription>
+        </Alert>
+      ) : (
+        <Button onClick={() => getAuth(instanceUrl, client_id, scopes)}>
           <ExternalLink className="mr-2 h-4 w-4" />
           Generate Access Token
         </Button>
