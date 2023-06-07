@@ -1,6 +1,7 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
-import InputForm from "@/components/InputForm";
+
+import { useState } from "react";
+import CreateAppForm from "@/components/CreatAppForm";
 import ResultTable from "@/components/tables/ResultTable";
 import useCreateApp from "@/hooks/useCreateApp";
 import {
@@ -10,7 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { FormSchema } from "@/components/InputForm";
+import { FormSchema } from "@/components/CreatAppForm";
 
 export type AppInfo = Pick<FormSchema, "instanceUrl" | "scopes">;
 
@@ -22,7 +23,6 @@ const FormContainer = () => {
     scopes: [""],
   });
 
-
   return (
     <>
       <Card className="mt-5">
@@ -31,7 +31,7 @@ const FormContainer = () => {
           <CardDescription>Card Description</CardDescription>
         </CardHeader>
         <CardContent>
-          <InputForm createApp={createApp} setAppInfo={setAppInfo} />
+          <CreateAppForm createApp={createApp} setAppInfo={setAppInfo} credentials={credentials}/>
         </CardContent>
       </Card>
       {credentials && (

@@ -1,7 +1,9 @@
 "use client";
 import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { Dispatch, SetStateAction, useState } from "react";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -14,11 +16,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
 import ScopeSection from "@/components/scopes/ScopeSection";
+import { AppInfo } from "@/components/FormContainer";
+
 import { scopesInfo } from "@/lib/scopes";
-import { Dispatch, SetStateAction } from "react";
-import { AppInfo } from "./FormContainer";
+import { Credentials } from "@/lib/types";
 
 const formSchema = z.object({
   instanceUrl: z.string().url().trim(),
@@ -29,12 +31,18 @@ const formSchema = z.object({
 });
 
 export type FormSchema = z.infer<typeof formSchema>;
-interface InputFormProps {
+interface CreateAppFormProps {
   createApp: ({}: FormSchema) => Promise<void>;
   setAppInfo: Dispatch<SetStateAction<AppInfo>>;
+  credentials: Credentials | undefined;
 }
 
-const InputForm: React.FC<InputFormProps> = ({ createApp, setAppInfo }) => {
+const CreateAppForm: React.FC<CreateAppFormProps> = ({
+  createApp,
+  setAppInfo,
+  credentials,
+}) => {
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,11 +50,13 @@ const InputForm: React.FC<InputFormProps> = ({ createApp, setAppInfo }) => {
       clientName: "",
       redirectUris: "urn:ietf:wg:oauth:2.0:oob",
       scopes: ["read"],
+      website: ""
     },
   });
 
   const onSubmit = async (values: FormSchema) => {
     setAppInfo(values);
+    setIsSubmitted(true);
     await createApp(values);
   };
 
@@ -115,7 +125,7 @@ const InputForm: React.FC<InputFormProps> = ({ createApp, setAppInfo }) => {
                 <code className="relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-xs font-semibold">
                   urn:ietf:wg:oauth:2.0:oob
                 </code>{" "}
-                for local tests or for getting access token
+                for local tests or to obtaining an access token.
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -150,11 +160,19 @@ const InputForm: React.FC<InputFormProps> = ({ createApp, setAppInfo }) => {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-ful">
-          Submit
-        </Button>
+
+        {!credentials && isSubmitted ? (
+          <Button disabled className="w-ful">
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            Please wait
+          </Button>
+        ) : (
+          <Button type="submit" className="w-ful">
+            Submit
+          </Button>
+        )}
       </form>
     </Form>
   );
 };
-export default InputForm;
+export default CreateAppForm;

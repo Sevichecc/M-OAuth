@@ -1,9 +1,9 @@
-import { FormSchema } from "@/components/InputForm";
+import { FormSchema } from "@/components/CreatAppForm";
 import { useCallback, useState } from "react";
-import { AppEntry, MError } from "@/lib/types";
+import { Credentials, MError } from "@/lib/types";
 
 const useCreateApp = () => {
-  const [credentials, setCredentials] = useState<AppEntry>();
+  const [credentials, setCredentials] = useState<Credentials>();
 
   const createApp = useCallback(
     async ({
