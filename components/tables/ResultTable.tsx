@@ -76,7 +76,7 @@ const ResultTable: React.FC<ResultTableProps> = ({ credentials, appInfo }) => {
         )}
       </Table>
       {isLocal ? (
-        <Button onClick={() => getAuth(instanceUrl, client_id, scopes)}>
+        <Button onClick={() => getAuth(instanceUrl, client_id, scopes)} variant="secondary">
           <ExternalLink className="mr-2 h-4 w-4" />
           Generate Access Token
         </Button>

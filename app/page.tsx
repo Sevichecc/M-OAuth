@@ -1,17 +1,11 @@
 import ClientOnly from "@/components/ClientOnly";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import FormContainer from "@/components/FormContainer";
-
+import Brand from "@/components/Brand";
 export default function Home() {
   return (
     <main>
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-4">
+        <Brand/>
         <ClientOnly>
           <FormContainer />
         </ClientOnly>

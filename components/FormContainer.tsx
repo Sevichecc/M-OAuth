@@ -25,20 +25,20 @@ const FormContainer = () => {
 
   return (
     <>
-      <Card className="mt-5">
+      <Card>
         <CardHeader>
-          <CardTitle>M-OAuth</CardTitle>
-          <CardDescription>Card Description</CardDescription>
+          <CardTitle>Create an Application</CardTitle>
+          <CardDescription>Register client applications that can be used to obtain OAuth tokens.</CardDescription>
         </CardHeader>
         <CardContent>
           <CreateAppForm createApp={createApp} setAppInfo={setAppInfo} credentials={credentials}/>
         </CardContent>
       </Card>
       {credentials && (
-        <Card className="mt-5">
+        <Card >
           <CardHeader>
-            <CardTitle>Result</CardTitle>
-            <CardDescription>Card Description</CardDescription>
+            <CardTitle>Credentials</CardTitle>
+            <CardDescription>Please keep this information secret and secure.</CardDescription>
           </CardHeader>
           <CardContent>
             <ResultTable credentials={credentials} appInfo={appInfo} />

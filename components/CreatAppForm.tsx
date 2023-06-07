@@ -168,7 +168,7 @@ const CreateAppForm: React.FC<CreateAppFormProps> = ({
           </Button>
         ) : (
           <Button type="submit" className="w-ful">
-            Submit
+            Create
           </Button>
         )}
       </form>
