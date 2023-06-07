@@ -1,3 +1,5 @@
+export type InstanceType = "mastodon" | "akkoma" | "misskey" | "pleroma";
+
 export type MethodType =
   | "read"
   | "write"
