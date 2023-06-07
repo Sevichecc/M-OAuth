@@ -51,6 +51,49 @@ export const ADMIN_WRITE_SCOPES = [
   "admin:write:canonical_email_blocks",
 ];
 
+export const PLEROMA_READ_SCOPE = [
+  ...READ_SCOPES,
+  "read:backups",
+  "read:chats",
+  "read:securit",
+];
+
+export const PLEROMA_WRITE_SCOPE = [
+  ...WRITE_SCOPES,
+  "write:chats",
+  "write:security",
+];
+
+export const AKKOMA_READ_SCOPE = [
+  ...READ_SCOPES,
+  "read:backups",
+  "read:chats",
+  "read:securit",
+];
+
+export const AKKOMA_WRITE_SCOPE = [
+  ...WRITE_SCOPES,
+  "write:chats",
+  "write:security",
+];
+
+export const PLEROMA_ADMIN_READ_SCOPES = [
+  ...ADMIN_READ_SCOPES,
+  "admin:read:chats",
+  "admin:read:invites",
+  "admin:read:statuses",
+  "admin:read:follows",
+  "admin:read:media_proxy_caches",
+];
+export const PLEROMA_ADMIN_WRITE_SCOPES = [
+  ...ADMIN_READ_SCOPES,
+  "admin:write:chats",
+  "admin:write:invites",
+  "admin:write:statuses",
+  "admin:write:follows",
+  "admin:write:media_proxy_caches",
+];
+
 export const scopesInfo: ScopeInfo[] = [
   {
     method: "read",

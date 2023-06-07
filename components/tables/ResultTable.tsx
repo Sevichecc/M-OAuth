@@ -16,8 +16,6 @@ import { ExternalLink } from "lucide-react";
 import { getAuth } from "@/lib/utils";
 import { AppInfo } from "../FormContainer";
 import { KeyRound } from "lucide-react";
-import { forwardRef } from "react";
-import ClientOnly from "../ClientOnly";
 interface ResultTableProps {
   credentials: Credentials;
   appInfo: AppInfo;
