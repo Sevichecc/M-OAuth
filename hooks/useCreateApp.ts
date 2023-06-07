@@ -1,9 +1,11 @@
 import { FormSchema } from "@/components/CreatAppForm";
 import { useCallback, useState } from "react";
 import { Credentials, MError } from "@/lib/types";
+import { useToast } from "@/components/ui/use-toast";
 
 const useCreateApp = () => {
   const [credentials, setCredentials] = useState<Credentials>();
+  const { toast } = useToast();
 
   const createApp = useCallback(
     async ({
@@ -34,9 +36,15 @@ const useCreateApp = () => {
         }
         setCredentials(await request.json());
       } catch (error) {
-        throw new Error((error as MError).error);
+        const mError = error as MError;
+        toast({
+          title: mError.error,
+          description: mError.error_description,
+        });
+        throw new Error(mError.error);
       }
-    },[]
+    },
+    []
   );
 
   return {
