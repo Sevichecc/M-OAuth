@@ -21,7 +21,7 @@ const ScopeSection: React.FC<ScopeSectionProps> = ({ info, field }) => {
   const { method, description, scopes, label } = info;
   const isNested = scopes && scopes.length !== 0;
   return (
-    <Collapsible className="flex flex-col rounded-md bg-slate-50 px-4 py-3">
+    <Collapsible className="flex flex-col rounded-md bg-slate-50 px-4 py-3 dark:bg-muted">
       <div className="flex justify-between">
         <div className="items-top flex space-x-2 ">
           <Checkbox

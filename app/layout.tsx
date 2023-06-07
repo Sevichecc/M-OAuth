@@ -1,11 +1,16 @@
 import "@/styles/globals.css";
 import { fontSans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 
 export const metadata = {
   title: "M-OAuth",
   description:
     "Access token generator for Akkoma, Pleroma, Mastodon, Misskey APIs.",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
 };
 
 export default function RootLayout({
@@ -18,11 +23,13 @@ export default function RootLayout({
       <head />
       <body
         className={cn(
-          "grid min-h-screen place-content-center place-items-center bg-background px-2 font-sans antialiased md:px-5 md:pb-10 md:pt-5",
+          "grid min-h-screen place-content-center place-items-center  bg-background px-2 font-sans antialiased md:px-5 md:pb-10 md:pt-5",
           fontSans.variable
         )}
       >
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

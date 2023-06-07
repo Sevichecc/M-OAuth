@@ -12,7 +12,7 @@ const headlines = [
 ];
 const Brand = () => {
   return (
-    <section className="rounded-lg px-5 py-4 bg-slate-50">
+    <section className="rounded-lg px-5 py-4 bg-slate-50 dark:bg-muted">
       <h1 className="scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl">
         M-OAuth
       </h1>
@@ -68,7 +68,7 @@ const Brand = () => {
                 width="15"
                 height="15"
                 alt="Github"
-                className="mr-2"
+                className="mr-2 dark:invert"
               />
               Github
             </Button>
@@ -80,7 +80,7 @@ const Brand = () => {
                 width="15"
                 height="15"
                 alt="Codeberg"
-                className="mr-2"
+                className="mr-2 dark:invert"
               />
               Codeberg
             </Button>
@@ -89,7 +89,7 @@ const Brand = () => {
           <ul className="flex flex-col gap-2 mb-2 justify-self-end">
             {headlines.map((headline) => (
               <li className="flex items-center gap-2" key={headline}>
-                <BadgeCheck className="-mt-[2px] h-5 w-5 stroke-green-600" />
+                <BadgeCheck className="-mt-[2px] h-5 w-5 stroke-green-600 dark:stroke-green-500" />
                 {headline}
               </li>
             ))}

@@ -132,7 +132,8 @@ const CreateAppForm: React.FC<CreateAppFormProps> = ({
                         className="mr-2"
                       />
                       Pleroma
-                    </span></SelectItem>
+                    </span>
+                  </SelectItem>
                   <SelectItem value="akkoma">
                     <span className="flex">
                       <Image
@@ -143,9 +144,9 @@ const CreateAppForm: React.FC<CreateAppFormProps> = ({
                         className="mr-2"
                       />
                       Akkoma
-                    </span></SelectItem>
+                    </span>
+                  </SelectItem>
                   <SelectItem value="misskey">
-                    
                     <span className="flex">
                       <Image
                         src="https://cdn.simpleicons.org/misskey"
@@ -155,7 +156,8 @@ const CreateAppForm: React.FC<CreateAppFormProps> = ({
                         className="mr-2"
                       />
                       Misskey
-                    </span></SelectItem>
+                    </span>
+                  </SelectItem>
                 </SelectContent>
               </Select>
               <FormMessage />
