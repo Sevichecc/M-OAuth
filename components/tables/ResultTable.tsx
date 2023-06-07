@@ -1,9 +1,8 @@
 "use client";
-
+import { useEffect, useRef } from "react";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -17,6 +16,8 @@ import { ExternalLink } from "lucide-react";
 import { getAuth } from "@/lib/utils";
 import { AppInfo } from "../FormContainer";
 import { KeyRound } from "lucide-react";
+import { forwardRef } from "react";
+import ClientOnly from "../ClientOnly";
 interface ResultTableProps {
   credentials: Credentials;
   appInfo: AppInfo;
@@ -33,6 +34,7 @@ const renderTableRow = (label: string, value: string | undefined) => (
 );
 
 const ResultTable: React.FC<ResultTableProps> = ({ credentials, appInfo }) => {
+  const scrollToRef = useRef<HTMLDivElement>(null);
   const { instanceUrl, scopes } = appInfo;
   const {
     id,
@@ -45,8 +47,15 @@ const ResultTable: React.FC<ResultTableProps> = ({ credentials, appInfo }) => {
   } = credentials;
 
   const isLocal = redirect_uri === "urn:ietf:wg:oauth:2.0:oob";
+
+  useEffect(() => {
+    if (scrollToRef.current) {
+      scrollToRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, []);
+
   return (
-    <div className="flex flex-col items-center gap-5">
+    <div className="flex flex-col items-center gap-5" ref={scrollToRef}>
       <Table>
         <TableHeader>
           <TableRow>
@@ -67,6 +76,11 @@ const ResultTable: React.FC<ResultTableProps> = ({ credentials, appInfo }) => {
         )}
       </Table>
       {isLocal ? (
+        <Button onClick={() => getAuth(instanceUrl, client_id, scopes)}>
+          <ExternalLink className="mr-2 h-4 w-4" />
+          Generate Access Token
+        </Button>
+      ) : (
         <Alert>
           <KeyRound className="h-4 w-4" />
           <AlertTitle>Need an Access Token?</AlertTitle>
@@ -78,11 +92,6 @@ const ResultTable: React.FC<ResultTableProps> = ({ credentials, appInfo }) => {
             to obtain your access token.
           </AlertDescription>
         </Alert>
-      ) : (
-        <Button onClick={() => getAuth(instanceUrl, client_id, scopes)}>
-          <ExternalLink className="mr-2 h-4 w-4" />
-          Generate Access Token
-        </Button>
       )}
     </div>
   );

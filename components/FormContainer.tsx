@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import InputForm from "@/components/InputForm";
 import ResultTable from "@/components/tables/ResultTable";
 import useCreateApp from "@/hooks/useCreateApp";
@@ -21,6 +21,7 @@ const FormContainer = () => {
     instanceUrl: "",
     scopes: [""],
   });
+
 
   return (
     <>

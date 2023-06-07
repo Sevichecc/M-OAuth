@@ -1,5 +1,3 @@
-"use client";
-
 import { TableCell, TableRow } from "@/components/ui/table";
 import { CopyButton } from "@/components/ui/copybutton";
 
