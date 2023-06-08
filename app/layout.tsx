@@ -11,6 +11,32 @@ export const metadata = {
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon-16x16/png',
+    apple: "/apple-touch-icon.png",
+  },
+  openGraph: {
+    title: 'M-OAuth',
+    description: 'Access token generator for Akkoma, Pleroma, Mastodon, Misskey APIs.',
+    url: 'https://moauth.seviche.cc',
+    siteName: 'M-OAuth',
+    images: [
+      {
+        url: 'https://nextjs.org/og.png',
+        width: 800,
+        height: 600,
+      },
+      {
+        url: 'https://nextjs.org/og-alt.png',
+        width: 1800,
+        height: 1600,
+        alt: 'My custom alt',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({

@@ -113,7 +113,7 @@ const CreateAppForm: React.FC<CreateAppFormProps> = ({
                   <SelectItem value="mastodon" className="flex">
                     <span className="flex">
                       <Image
-                        src="https://cdn.simpleicons.org/mastodon"
+                        src="/mastodon.svg"
                         width="15"
                         height="15"
                         alt="Mastodon"
@@ -125,7 +125,7 @@ const CreateAppForm: React.FC<CreateAppFormProps> = ({
                   <SelectItem value="pleroma">
                     <span className="flex">
                       <Image
-                        src="https://cdn.simpleicons.org/pleroma"
+                        src="/pleroma.svg"
                         width="15"
                         height="15"
                         alt="Pleroma"

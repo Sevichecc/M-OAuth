@@ -18,7 +18,7 @@ const Brand = () => {
       <div className="grid md:grid-cols-3 items-end">
         <div className="col-span-2 "> 
           <p className="text-md ml-2 text-muted-foreground">
-            Access token generator for{" "}
+            Generate access tokens for {" "}
             <a
               href="https://akkoma.social/"
               className="text-primary underline-offset-4 hover:underline"
@@ -46,7 +46,7 @@ const Brand = () => {
             >
               Misskey
             </a>{" "} */}
-            APIs.
+            APIs with ease.
           </p>
           <a href="https://github.com/Sevichecc">
             <Button variant="link" className="rounded-full p-2">
