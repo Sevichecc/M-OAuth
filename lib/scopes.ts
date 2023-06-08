@@ -72,7 +72,7 @@ const PLEROMA_ADMIN_READ_SCOPES = [
   "admin:read:media_proxy_caches",
 ];
 const PLEROMA_ADMIN_WRITE_SCOPES = [
-  ...ADMIN_READ_SCOPES,
+  ...ADMIN_WRITE_SCOPES,
   "admin:write:chats",
   "admin:write:invites",
   "admin:write:statuses",
