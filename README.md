@@ -29,5 +29,5 @@ Access tokens are frequently used in development, but Akkoma and Pleroma lack an
 
 To address this issue, I wanted Akkoma to have an easy way to register a client app and obtain an access token for testing. I opened an [issue](https://akkoma.dev/AkkomaGang/akkoma-fe/issues/296) on Akkoma-fe, but it has been pending for about a month without any response from the developer. As a result, I created this project.
 
-This app is inspired by the [Access Token Generator for Pleroma](https://tools.splat.soy/pleroma-access-token/) API, but offers more features, such as finer-grained admin scopes, no analytics, and no data storage in local storage, making it a safer option.
+This app is inspired by the [Access Token Generator for Pleroma API](https://tools.splat.soy/pleroma-access-token/) , but offers more features, such as finer-grained admin scopes, no analytics, and no data storage in local storage, making it a safer option.
 
