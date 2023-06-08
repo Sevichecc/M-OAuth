@@ -116,7 +116,7 @@ const CreateAppForm: React.FC<CreateAppFormProps> = ({
                         src="https://cdn.simpleicons.org/mastodon"
                         width="15"
                         height="15"
-                        alt="Github"
+                        alt="Mastodon"
                         className="mr-2"
                       />
                       Mastodon
@@ -128,7 +128,7 @@ const CreateAppForm: React.FC<CreateAppFormProps> = ({
                         src="https://cdn.simpleicons.org/pleroma"
                         width="15"
                         height="15"
-                        alt="Github"
+                        alt="Pleroma"
                         className="mr-2"
                       />
                       Pleroma
@@ -140,7 +140,7 @@ const CreateAppForm: React.FC<CreateAppFormProps> = ({
                         src="/akkoma.svg"
                         width="15"
                         height="15"
-                        alt="Github"
+                        alt="Akkoma"
                         className="mr-2"
                       />
                       Akkoma
