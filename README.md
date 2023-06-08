@@ -5,6 +5,8 @@ Generate access tokens for [Akkoma](https://akkoma.social/), [Pleroma](https://p
 - Obtain an account's access token
 
 Build with Next.js(13) and [shadcn/ui](https://ui.shadcn.com/)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FSevichecc%2FM-OAuth&project-name=m-oauth&repository-name=M-OAuth&demo-title=M-OAuth&demo-description=Access%20token%20generator%20for%20Akkoma%2C%20Pleroma%2C%20Mastodon%20APIs.&demo-url=https%3A%2F%2Fm-oauth.seviche.cc&demo-image=https%3A%2F%2Fm-oauth.seviche.cc%2Fog.png)
 ## Implemantaion
 
 | Software | Status     |
