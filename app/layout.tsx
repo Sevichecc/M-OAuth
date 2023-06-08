@@ -19,20 +19,14 @@ export const metadata = {
   openGraph: {
     title: 'M-OAuth',
     description: 'Access token generator for Akkoma, Pleroma, Mastodon, Misskey APIs.',
-    url: 'https://moauth.seviche.cc',
+    url: 'https://m-oauth.seviche.cc',
     siteName: 'M-OAuth',
     images: [
       {
-        url: 'https://nextjs.org/og.png',
+        url: '/og.png',
         width: 800,
         height: 600,
-      },
-      {
-        url: 'https://nextjs.org/og-alt.png',
-        width: 1800,
-        height: 1600,
-        alt: 'My custom alt',
-      },
+      }
     ],
     locale: 'en_US',
     type: 'website',
