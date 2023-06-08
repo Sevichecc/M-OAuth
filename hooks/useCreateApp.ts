@@ -44,7 +44,7 @@ const useCreateApp = () => {
         throw new Error(mError.error);
       }
     },
-    []
+    [toast]
   );
 
   return {
