@@ -137,7 +137,7 @@ const CreateAppForm: React.FC<CreateAppFormProps> = ({
                   <SelectItem value="akkoma">
                     <span className="flex">
                       <Image
-                        src="https://cdn.simpleicons.org/pleroma"
+                        src="/akkoma.svg"
                         width="15"
                         height="15"
                         alt="Github"
@@ -146,7 +146,7 @@ const CreateAppForm: React.FC<CreateAppFormProps> = ({
                       Akkoma
                     </span>
                   </SelectItem>
-                  <SelectItem value="misskey">
+                  {/* <SelectItem value="misskey">
                     <span className="flex">
                       <Image
                         src="https://cdn.simpleicons.org/misskey"
@@ -157,7 +157,7 @@ const CreateAppForm: React.FC<CreateAppFormProps> = ({
                       />
                       Misskey
                     </span>
-                  </SelectItem>
+                  </SelectItem> */}
                 </SelectContent>
               </Select>
               <FormMessage />

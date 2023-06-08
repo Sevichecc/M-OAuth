@@ -2,9 +2,8 @@ import Image from "next/image";
 import { BadgeCheck } from "lucide-react";
 
 import { Button } from "./ui/button";
-("lucide-react");
 
-const headlines = [
+const lists = [
   "Self-hostable",
   "No Tracking",
   "No Data Collection",
@@ -17,7 +16,7 @@ const Brand = () => {
         M-OAuth
       </h1>
       <div className="grid md:grid-cols-3 items-end">
-        <div className="col-span-2 ">
+        <div className="col-span-2 "> 
           <p className="text-md ml-2 text-muted-foreground">
             Access token generator for{" "}
             <a
@@ -41,18 +40,18 @@ const Brand = () => {
               Mastodon
             </a>
             ,{" "}
-            <a
+            {/* <a
               href="https://misskey-hub.net/"
               className="text-primary underline-offset-4 hover:underline"
             >
               Misskey
-            </a>{" "}
+            </a>{" "} */}
             APIs.
           </p>
-          <a href="https://github.com/Sevichecc/m-oauth">
+          <a href="https://github.com/Sevichecc">
             <Button variant="link" className="rounded-full p-2">
               <Image
-                src="https://github.com/Sevichecc.png"
+                src="/avatar.jpg"
                 width="15"
                 height="15"
                 alt="Github"
@@ -73,24 +72,24 @@ const Brand = () => {
               Github
             </Button>
           </a>
-          <a href="https://codeberg.org/Sevichecc/m-oauth">
+          <a href="https://git.kongwoo.icu/SevicheCC/m-oauth">
             <Button variant="link" className="rounded-full p-2">
               <Image
-                src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/codeberg.svg"
+                src="/forgejo.svg"
                 width="15"
                 height="15"
                 alt="Codeberg"
                 className="mr-2 dark:invert"
               />
-              Codeberg
+              Forgejo
             </Button>
           </a>
         </div>
           <ul className="flex flex-col gap-2 mb-2 justify-self-end">
-            {headlines.map((headline) => (
-              <li className="flex items-center gap-2" key={headline}>
+            {lists.map((list) => (
+              <li className="flex items-center gap-2" key={list}>
                 <BadgeCheck className="-mt-[2px] h-5 w-5 stroke-green-600 dark:stroke-green-500" />
-                {headline}
+                {list}
               </li>
             ))}
           </ul>

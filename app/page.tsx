@@ -1,6 +1,6 @@
 import ClientOnly from "@/components/ClientOnly";
 import FormContainer from "@/components/FormContainer";
-import Brand from "@/components/Brand";
+import Brand from "@/components/Branding";
 
 export default function Home() {
   return (
