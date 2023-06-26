@@ -37,7 +37,7 @@ const formSchema = z.object({
   clientName: z.string().trim(),
   redirectUris: z.string().trim(),
   scopes: z.string().array().nonempty().optional(),
-  website: z.string().url().trim().optional(),
+  website: z.string().trim().optional(),
 });
 
 export type FormSchema = z.infer<typeof formSchema>;
