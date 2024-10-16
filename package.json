@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "eslint . -fix",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -23,7 +23,7 @@
     "class-variance-authority": "^0.6.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.344.0",
-    "next": "14.1.2",
+    "next": "14.2.15",
     "next-themes": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
