@@ -4,13 +4,10 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 
 export const metadata = {
+  metadataBase: new URL('https://m-oauth.seviche.cc'),
   title: "M-OAuth",
   description:
     "Access token generator for Akkoma, Pleroma, Mastodon, Misskey APIs.",
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
   icons: {
     icon: '/favicon.ico',
     shortcut: '/favicon-16x16/png',
@@ -33,6 +30,12 @@ export const metadata = {
   },
 };
 
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
+  ],
+};
 export default function RootLayout({
   children,
 }: {
